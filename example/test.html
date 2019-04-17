@@ -9,7 +9,7 @@
     <script src="http://cdn.jsdelivr.net/gh/highlightjs/cdn-release@9.12.0/build/highlight.min.js"></script>
     <!-- 引入组件库 -->
     <script src="https://unpkg.com/vue/dist/vue.js"></script>
-    <script src="https://unpkg.com/element-ui/lib/index.js"></script>
+    <script src="https://unpkg.com/element-ui@2.6.3/lib/index.js"></script>
     <script type="text/javascript" src="../dist/tree-table.js"></script>
     <script type="text/javascript" src="./data.js"></script>
     <style type="text/css">
@@ -98,6 +98,7 @@
         </div>
 
         <script type="text/javascript">
+        console.log('trees',trees)
             new Vue({
                 el: "#app1",
                 created() {

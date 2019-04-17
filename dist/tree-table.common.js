@@ -46,8 +46,8 @@ var index = function mergeJSXProps(objs) {
 
 function mergeFn(a, b) {
   return function () {
-    a.apply(this, arguments);
-    b.apply(this, arguments);
+    a && a.apply(this, arguments);
+    b && b.apply(this, arguments);
   };
 }
 
@@ -227,17 +227,9 @@ function renderDetail(h, context, scope) {
         return context.data.scopedSlots.default(scope);
     }
     if (context.props.formatter) {
-        return h(
-            'span',
-            null,
-            [context.props.formatter(scope.row, scope.column)]
-        );
+        return h('span', [context.props.formatter(scope.row, scope.column)]);
     }
-    return h(
-        'span',
-        null,
-        [scope.row[context.props.prop]]
-    );
+    return h('span', [scope.row[context.props.prop]]);
 }
 
 var clone = function clone(data) {
@@ -320,8 +312,7 @@ var Colspand = function Colspand(context, scope, data) {
         parentKey = _a.parentKey,
         treeKey = _a.treeKey,
         states = scope.store.states,
-        row = scope.row,
-        result = [];
+        row = scope.row;
     var removeIds = descendantsIds(row[treeKey], data, parentKey, treeKey);
     data = data.filter(function (item) {
         return !removeIds.some(function (id) {
@@ -454,16 +445,8 @@ var RenderFolder = function RenderFolder(h, context, scope) {
         },
         [h(
             'span',
-            { style: { paddingLeft: paddingLeft(context, scope) } },
-            [h(
-                'i',
-                { 'class': icon(scope, context) },
-                []
-            ), h(
-                'i',
-                { 'class': folderIcon(context, scope) },
-                []
-            )]
+            { style: { paddingLeft: paddingLeft(context, scope), cursor: 'pointer' } },
+            [h('i', { 'class': icon(scope, context) }), h('i', { 'class': folderIcon(context, scope) })]
         ), renderDetail(h, context, scope)]
     );
 };
@@ -471,11 +454,7 @@ var RenderLeaf = function RenderLeaf(h, context, scope) {
     return h(
         'span',
         { style: { paddingLeft: paddingLeft(context, scope) } },
-        [h(
-            'i',
-            { 'class': context.props.fileIcon },
-            []
-        ), renderDetail(h, context, scope)]
+        [h('i', { 'class': context.props.fileIcon }), renderDetail(h, context, scope)]
     );
 };
 var RenderContext = function RenderContext(h, context, scope) {
@@ -495,13 +474,9 @@ var ElTableTreeColumn = {
             attr[k] = context.props[k];
         });
         var attrs = { attrs: attr };
-        return h(
-            'el-table-column',
-            index([attrs, { scopedSlots: { default: function _default(scope) {
-                        return RenderContext(h, context, scope);
-                    } } }]),
-            []
-        );
+        return h('el-table-column', index([attrs, { scopedSlots: { default: function _default(scope) {
+                    return RenderContext(h, context, scope);
+                } } }]));
     }
 };
 if (typeof window !== 'undefined' && window.Vue) {

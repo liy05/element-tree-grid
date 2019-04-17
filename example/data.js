@@ -244,3 +244,44 @@ var trees = [{
         }]
     }]
 }]
+
+for(var i=20;i<100;i++){
+    trees.push({
+        "id": 1+i*i,
+        "label": "System",
+        "parent_id": null,
+        "depth": 0,
+        "child_num": 3,
+        "description": "System Manager",
+        "children": [{
+            "id": 2+i*i,
+            "label": "base",
+            "parent_id": 1+i*i,
+            "depth": 1,
+            "child_num": 5,
+            "description": "Base Manager",
+            "children": [{
+                "id": 3+i*i,
+                "label": "Menus",
+                "parent_id": 2+i*i,
+                "depth": 2,
+                "child_num": 0,
+                "description": "menu manager",
+            }, {
+                "id": 4+i*i,
+                "label": "Roles",
+                "parent_id": 2+i*i,
+                "depth": 2,
+                "child_num": 0,
+                "description": "Role Manager",
+            }, {
+                "id": 5+i*i,
+                "label": "Users",
+                "parent_id": 2+i*i,
+                "depth": 2,
+                "child_num": 0,
+                "description": "User Manager",
+            }]
+        }]
+    })
+}

@@ -27,9 +27,9 @@ const RenderFolder = function (h: CreateElement, context: RenderContext<ElTableT
       e.preventDefault();
       Expand.doExpand(context, scope)
     }}>
-    <span style={{ paddingLeft: util.paddingLeft(context, scope) }}>
+    <span style={{ paddingLeft: util.paddingLeft(context, scope),cursor:'pointer'  }}>
       <i class={util.icon(scope, context)} ></i>
-      <i class={util.folderIcon(context, scope)}></i>
+      <i class={util.folderIcon(context, scope)} ></i>
     </span>
     {util.renderDetail(h, context, scope)}
   </span>
